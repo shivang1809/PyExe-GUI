@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter.ttk import Combobox
 import os
+import re
+import time
 
 win = Tk()
 win.title('exeMaker')
@@ -16,10 +18,9 @@ def filePath():
 
 def generate():
     filePath=path.get("1.0","end-1c")
-    filename=fileName.get("1.0","end-1c")
+    # filename=fileName.get("1.0","end-1c")
     exename=outputName.get("1.0","end-1c")
     outType = ot.get()
-    print (outType)
     stat.set('checking details entered..')
     if len(filePath) == 0 or len(exename) == 0:
         stat.set('Please enter the above details to continue the Build')
@@ -30,26 +31,30 @@ def generate():
         stat.set('Bulding...')
         win.update()
         try:
-            direcotry = filePath.replace(filename,'')
-            os.chdir(direcotry)
+            directory = re.findall(r"^[A-Z]:/.*/", filePath)[0]
+            filename = re.sub(r"^[A-Z]:/.*/", "", filePath)
+            os.chdir(directory)
             if outType == 'Hidden':
-                os.system('pyinstaller '+ filePath +' -n'+ exename+' --noconsole')                
+                var = os.system('pyinstaller '+ filename +' -n'+ exename+' --onefile --noconsole')                
             else:
-                os.system('pyinstaller '+ filePath +' -n'+ exename+'')
+                var = os.system('pyinstaller '+ filename +' -n'+ exename+' --onefile')
             stat.set('Done!!')
-        except:
+        except Exception as e:
+            print(e)
             stat.set('Build Fail!!')
+            makeBtn.bg = "Red"
     
-la= Label(win, text='File Name:', fg='Blue', font=8).grid(row=0,column=0)
-fileName = Text(win, height=1, width=40)
-fileName.grid(row=0,column=1,padx=10)
-sug = Label(win, text='Enter file name with .py extention').grid(row=1,column=1, padx=10)
+# la= Label(win, text='File Name:', fg='Blue', font=8).grid(row=0,column=0)
+# fileName = Text(win, height=1, width=40)
+# fileName.grid(row=0,column=1,padx=10)
+# sug = Label(win, text='Enter file name with .py extention').grid(row=1,column=1, padx=10)
+Heading = Label(win, text='ExeMaker', fg='Black', font=8).grid(row=0,column=1)
 
 la1= Label(win, text='Path:', fg='Blue', font=8)
 la1.grid(row=2,column=0,pady=5)
 path = Text(win, height=1, width=40)
 path.grid(row=2,column=1,pady=5, padx=10)
-selectFileBtn = Button(win, text= "Select File", command= filePath).grid(row=2,column=2, padx=5)
+selectFileBtn = Button(win, text= "Select File", command=filePath).grid(row=2,column=2, padx=5)
 
 ol = Label(win, text='EXE Name:', fg='Blue', font=8)
 ol.grid(row=3,column=0,pady=5)
@@ -63,6 +68,6 @@ ot.grid(row=4,column=1)
 status= Label(win, textvariable=stat, fg='Green', font=8)
 status.grid(row=5,column=1,pady=5)
 
-makeBtn = Button(win, text= "Generate EXE", bg='lightgreen',font=7, command= generate).grid(row=6,column=1, padx=5, pady=5)
+makeBtn = Button(win, text= "Generate EXE", bg='lightgreen',font=7, command= generate).grid(row=6,column=1, padx=5, pady=2)
 
 win.mainloop()
