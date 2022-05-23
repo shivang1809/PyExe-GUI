@@ -1,5 +1,5 @@
 # PyExe-GUI
-PyExe-GUI helps you to convert python files(.py) to executable files(.exe)
+PyExe-GUI helps you to convert python files(.py) to executable files(.exe) with the convenience of GUI.
 
 ## Developer Tools
 
