@@ -20,6 +20,6 @@ PyExe-GUI helps you to convert python files(.py) to executable files(.exe) with 
 
 ## License
 
-License © 2022-Present Shivang Yadav
+License © 2022-Present Shivang
 
 This repository is licensed under the MIT license. See the LICENSE file for details.
