@@ -18,7 +18,6 @@ def filePath():
 
 def generate():
     filePath=path.get("1.0","end-1c")
-    # filename=fileName.get("1.0","end-1c")
     exename=outputName.get("1.0","end-1c")
     outType = ot.get()
     stat.set('checking details entered..')
@@ -44,10 +43,7 @@ def generate():
             stat.set('Build Fail!!')
             makeBtn.bg = "Red"
     
-# la= Label(win, text='File Name:', fg='Blue', font=8).grid(row=0,column=0)
-# fileName = Text(win, height=1, width=40)
-# fileName.grid(row=0,column=1,padx=10)
-# sug = Label(win, text='Enter file name with .py extention').grid(row=1,column=1, padx=10)
+
 Heading = Label(win, text='ExeMaker', fg='Black', font=8).grid(row=0,column=1)
 
 la1= Label(win, text='Path:', fg='Blue', font=8)
