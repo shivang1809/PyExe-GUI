@@ -18,6 +18,7 @@ PyExe-GUI helps you to convert python files(.py) to executable files(.exe) with 
 #### Developers
 - [Shivang Yadav](https://github.com/shivang1809)
 - [Apoorv Mittal](https://github.com/Apoorv012)
+- [Sujal Choudhari](https://github.com/SujalChoudhari)
 
 ## License
 
